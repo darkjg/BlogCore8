@@ -5,14 +5,20 @@ $(document).ready(function () {
 })
 
 function cargarDatatable() {
+
     dataTable = $("#tblCategorias").DataTable({
         "ajax": {
             "url": "/admin/categorias/GetAll",
             "type": "GET",
-            "datatype":"json"
-        }, "colums": [
-            { "data": "id", "width": "5%" },
+            "datatype": "json",
+           
+             "error": function (xhr, errorText, thrownError) {
+                console.error('Error al cargar datos:', xhr, errorText, thrownError);
+                alert('Error al cargar datos. Consulta la consola para más detalles.');
+            }
 
+        }, "columns": [
+            { "data": "id", "width": "5%" },
             { "data": "nombre", "width": "50%" },
             { "data": "orden", "width": "20%" },
             {
