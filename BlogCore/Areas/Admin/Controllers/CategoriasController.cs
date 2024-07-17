@@ -40,6 +40,36 @@ namespace BlogCore.Areas.Admin.Controllers
             }
             return View(categoria);
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            Categoria categoria= new Categoria();
+            categoria=_contenedorTrabajo.Categoria.Get(id);
+            if (categoria != null) {
+                return View(categoria);
+            }
+            else
+            {
+                return NotFound();
+            }
+         
+        }
+
+        public IActionResult Edit(Categoria categoria)
+        {
+            if (ModelState.IsValid)
+            {
+                _contenedorTrabajo.Categoria.Update(categoria);
+                _contenedorTrabajo.Save();
+                return RedirectToAction(nameof(Index));
+
+            }
+            return View(categoria);
+        }
+
+
+
         //llamadas a api
         [HttpGet]
         public IActionResult Getall()
@@ -53,6 +83,20 @@ namespace BlogCore.Areas.Admin.Controllers
                 Debug.WriteLine($"Id: {id}, Nombre: {nombre}, Orden: {orden}");
             }
             return Json(new { data });
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id) { 
+            var objFormdb=_contenedorTrabajo.Categoria.Get(id);
+            if (objFormdb != null)
+            {
+                _contenedorTrabajo.Categoria.Remove(objFormdb);
+                _contenedorTrabajo.Save();
+                return Json(new { success = true, message = "Borrado correcto" });
+            }
+            else { 
+                return Json(new { success = false,message="Error al borrar" });
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model BlogCore.Models.Categoria
 
 @{
-    ViewData["Title"] = "Crear Categoría";
+    ViewData["Title"] = "Editar Categoría";
 }
 
 
@@ -9,9 +9,9 @@
 
 <br />
 
-<h3 class="text-center">Crear una nueva categoría</h3>
+<h3 class="text-center">Editar una categoría</h3>
 
-<form asp-action="Create" method="post">
+<form asp-action="Edit" method="post">
     <div class="row px-2 offset-1 border">
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="col-10 offset-1 mt-4">
@@ -51,8 +51,6 @@
     </div>
 
 </form>
-
-
 @section Scripts {
     @{
         <partial name="_ValidationScriptsPartial" />
