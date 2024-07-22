@@ -22,7 +22,7 @@ namespace BlogCore.AccesoDatos.Data.Repository
         {
             var objDb = _db.Articulo.FirstOrDefault(s => s.Id == articulo.Id);
             objDb.Nombre= articulo.Nombre;
-            objDb.Descirpcion= articulo.Descirpcion;
+            objDb.Descripcion= articulo.Descripcion;
             objDb.UrlImagen= articulo.UrlImagen;
             objDb.CategoriaId= articulo.CategoriaId;
             _db.SaveChanges();

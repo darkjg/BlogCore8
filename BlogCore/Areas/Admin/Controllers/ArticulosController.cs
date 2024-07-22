@@ -1,4 +1,5 @@
 ﻿using BlogCore.AccesoDatos.Data.Repository.IRepository;
+using BlogCore.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -20,6 +21,18 @@ namespace BlogCore.Areas.Admin.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            ArticuloViewModel articuloViewModel = new ArticuloViewModel()
+            {
+                Articulo = new BlogCore.Models.Articulo(),
+                ListaCategorias =_contenedorTrabajo.Categoria.GetListaCategorias()
+
+            };
+            return View(articuloViewModel);
         }
         //llamadas a api
         [HttpGet]
