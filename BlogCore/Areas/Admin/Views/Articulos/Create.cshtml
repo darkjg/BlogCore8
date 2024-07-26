@@ -3,69 +3,72 @@
 @{
     ViewData["Title"] = "Crear Articulo";
 }
-
-
+<br />
 <br />
 
-<br />
-
-<h3 class="text-center">Crear una nuevo Articulo</h3>
-
-<form asp-action="Create" method="post">
+<h3>Crear una nuevo artículo</h3>
+<form asp-action="Create" method="post" enctype="multipart/form-data">
     <div class="row px-2 offset-1 border">
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="col-10 offset-1 mt-4">
-            <div class="form-group row">
+            <div class="form-group row mb-3">
                 <div class="col-4">
                     <label asp-for="Articulo.Nombre"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Articulo.Nombre" class="form-control" placeholder="Nombre" />
+                    <input asp-for="Articulo.Nombre" class="form-control" placeholder="Ingresa el nombre" />
                     <span asp-validation-for="Articulo.Nombre" class="text-danger"></span>
                 </div>
             </div>
-
-
-            <br />
-
-            <div class="form-group row">
+            <div class="form-group row mb-3">
                 <div class="col-4">
                     <label asp-for="Articulo.Descripcion"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Articulo.Descripcion" class="form-control" placeholder="Orden" />
+                    <textarea asp-for="Articulo.Descripcion" class="form-control" style="height:300"></textarea>
                     <span asp-validation-for="Articulo.Descripcion" class="text-danger"></span>
                 </div>
             </div>
-            <br />
 
-
-
-            <div class="form-group row">
+            <div class="form-group row mb-3">
                 <div class="col-4">
                     <label for="Categoria">Categoría</label>
                 </div>
                 <div class="col-8">
-                   @Html.DropDownListFor(l => l.Articulo.CategoriaId,Model.ListaCategorias,"Seleccione una categoría",new {@class="form-control"})
-                   <span asp-validation-for="Articulo.CategoriaId" class="text-danger"></span>
+                    @Html.DropDownListFor(m => m.Articulo.CategoriaId, Model.ListaCategorias,
+                             "--Seleccione una categoría--", new { @class = "form-control" })
+                    <span asp-validation-for="Articulo.CategoriaId" class="text-danger"></span>
+
+                    @* <select class="form-control"  >
+                    <option value="0">--Seleccione una categoría--</option>
+                    @foreach (var item in Model.ListaCategorias)
+                    {
+                    <option value="@item.Value">@item.Text</option>
+                    }
+                    </select>
+                    <span asp-validation-for="Articulo.CategoriaID" class="text-danger"></span>
+                    *@
                 </div>
             </div>
-            <br />
 
-
-            <br />
-            <div class="form-group-row">
+            <div class="form-group row mb-3">
+                <div class="col-4">
+                    <label asp-for="Articulo.UrlImagen"></label>
+                </div>
                 <div class="col-8">
-                    <partial name="_VistaCrearVolver" />
+                    <input type="file" class="form-control" asp-for="Articulo.UrlImagen" id="subidaArchivo" />
+                    <span asp-validation-for="Articulo.UrlImagen" class="text-danger"></span>
                 </div>
             </div>
-            <br />
-
+            <div>
+                <div class="col-8">
+                    <partial name="_VistaCrearVolver"></partial>
+                </div>
+            </div>
         </div>
     </div>
 
 </form>
-
 
 @section Scripts {
     @{

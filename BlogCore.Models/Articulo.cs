@@ -12,27 +12,27 @@ namespace BlogCore.Models
     {
         [Key]
         public int Id { get; set; }
+
         [Required(ErrorMessage = "El nombre es obligatorio")]
-        [Display(Name = "Nombre del articulo")]
+        [Display(Name = "Nombre de artículo")]
         public string Nombre { get; set; }
 
-        [Required(ErrorMessage = "La Descripción es  obligatorio")]
-
+        [Required(ErrorMessage = "La descripción es obligatoria")]
         public string Descripcion { get; set; }
 
         [Display(Name = "La Fecha de la creación ")]
 
-        public string FechaDeCreacion { get; set; }
+        public string? FechaDeCreacion { get; set; }
 
-        [DataType(DataType.ImageUrl)]
         [Display(Name = "Imagen")]
-        public string UrlImagen { get; set; }
+        [DataType(DataType.ImageUrl)]
+        public string? UrlImagen { get; set; }
 
         [Required(ErrorMessage = "La categoría es  obligatoria")]
         public int CategoriaId { get; set; }
 
         [ForeignKey("CategoriaId")]
-        public Categoria Categoria { get; set; }
+        public Categoria? Categoria { get; set; }
 
     }
 }

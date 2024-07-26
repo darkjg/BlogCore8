@@ -11,6 +11,6 @@ namespace BlogCore.Models.ViewModels
     public class ArticuloViewModel
     {
         public Articulo Articulo { get; set; }
-        public IEnumerable<SelectListItem> ListaCategorias { get; set; }
+        public IEnumerable<SelectListItem> ?ListaCategorias { get; set; }
     }
 }

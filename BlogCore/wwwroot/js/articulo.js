@@ -12,7 +12,8 @@ function cargarDatatable() {
             "type": "GET",
             "datatype": "json",
            
-             "error": function (xhr, errorText, thrownError) {
+            "error": function (xhr, errorText, thrownError) {
+                console.log(dataTable)
                 console.error('Error al cargar datos:', xhr, errorText, thrownError);
                 alert('Error al cargar datos. Consulta la consola para más detalles.');
             }
@@ -21,7 +22,7 @@ function cargarDatatable() {
             { "data": "id", "width": "5%" },
             { "data": "nombre", "width": "20%" },
             { "data": "categoria.nombre", "width": "15%" },
-            { "data": "fechaCreacion", "width": "30%" },
+            { "data": "fechaDeCreacion", "width": "30%" },
             {
                 "data": "id", "render": function (data) {
                     return `<div class="text-center">
