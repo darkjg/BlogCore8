@@ -27,5 +27,7 @@ namespace BlogCore.AccesoDatos.Data.Repository
             objDb.CategoriaId= articulo.CategoriaId;
             _db.SaveChanges();
         }
+      
     }
+
 }
