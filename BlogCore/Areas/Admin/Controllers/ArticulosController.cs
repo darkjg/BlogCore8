@@ -110,23 +110,21 @@ namespace BlogCore.Areas.Admin.Controllers
             {
                 string rutaPrincipal = _hostingEnvironment.WebRootPath;
                 var archivos = HttpContext.Request.Form.Files;
-                Console.WriteLine("ID del Articulo: " + articuloViewModel.Articulo);
-                // Depurar el valor del ID
-                Console.WriteLine("ID del Articulo: " + articuloViewModel.Articulo.Id);
+
 
                 // Recuperar el artículo para actualizar
-                Console.WriteLine(_contenedorTrabajo.Articulo.GetAll());
+
                 var articuloToUpdate = _contenedorTrabajo.Articulo.Get(articuloViewModel.Articulo.Id);
 
                 // Depurar el artículo recuperado
                 if (articuloToUpdate == null)
                 {
-                    Console.WriteLine("Articulo no encontrado.");
+
                     return NotFound(); // Agregar un retorno para manejar el caso de no encontrar el artículo
                 }
                 else
                 {
-                    Console.WriteLine("Articulo encontrado: " + articuloToUpdate.Nombre);
+
                 }
 
                 if (archivos.Count() > 0)
@@ -176,6 +174,29 @@ namespace BlogCore.Areas.Admin.Controllers
         {
             var data = _contenedorTrabajo.Articulo.GetAll(includeProperties: "Categoria");
             return Json(new { data });
+        }
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var artDeDB = _contenedorTrabajo.Articulo.Get(id);
+            string rutaPrincipal = _hostingEnvironment.WebRootPath;
+            var rutaImagen = Path.Combine(rutaPrincipal, artDeDB.UrlImagen.TrimStart('\\'));
+
+            if (System.IO.File.Exists(rutaImagen))
+            {
+                System.IO.File.Delete(rutaImagen);
+            }
+
+            if (artDeDB != null)
+            {
+                _contenedorTrabajo.Articulo.Remove(artDeDB);
+                _contenedorTrabajo.Save();
+                return Json(new { success = true, message = "Borrado correcto" });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Error al borrar" });
+            }
         }
     }
 }
